@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">CuboMania</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="cube_size">
+        <item>Selecione um tamanho</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>7</item>
+    </string-array>
+
+    <string-array name="cube_type">
+        <item>Selecione um tipo</item>
+        <item>normal</item>
+        <item>personalizado</item>
+    </string-array>
+
+    <string-array name="cube_dificulty">
+        <item>Selecione uma dificuldade</item>
+        <item>facil</item>
+        <item>medio</item>
+        <item>dificil</item>
+    </string-array>
+
+</resources>
