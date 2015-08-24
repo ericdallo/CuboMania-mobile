@@ -1,7 +1,9 @@
 package com.cubomania.Fragment;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     private ServiceCubes serviceCubes;
     private TextView tvPrice, tvName, tvSize, tvType, tvDificulty;
     private ImageView ivCube;
-    private Button btSearch,btNext,btPrevious;
+    private FloatingActionButton btNext,btPrevious,btSearch;
     private List<Cube> cubeList;
     private Cube currentCube;
     private int currentPosition = 0;
@@ -50,16 +52,16 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
 
         ivCube = (ImageView) view.findViewById(R.id.cube_image);
 
-        btSearch = (Button) view.findViewById(R.id.bt_search);
-        btNext = (Button) view.findViewById(R.id.bt_next);
-        btPrevious = (Button) view.findViewById(R.id.bt_previous);
+        btNext = (FloatingActionButton) view.findViewById(R.id.bt_next);
+        btPrevious = (FloatingActionButton) view.findViewById(R.id.bt_previous);
+        btSearch = (FloatingActionButton) view.findViewById(R.id.bt_search);
 
         checkIfEnableNext();
         checkIfEnablePrevious();
 
-        btSearch.setOnClickListener( (View v) -> serviceCubes.getAll() );
-        btNext.setOnClickListener((View v) -> nextCube() );
-        btPrevious.setOnClickListener( (View v) -> previousCube() );
+        btNext.setOnClickListener((View v) -> nextCube());
+        btPrevious.setOnClickListener((View v) -> previousCube());
+        btSearch.setOnClickListener((View v) -> serviceCubes.getAll() );
 
         return view;
     }
@@ -99,48 +101,49 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
 
         checkIfEnableNext();
         checkIfEnablePrevious();
-
     }
 
     private void nextCube() {
-        currentCube = cubeList.get(++currentPosition);
-        tvName.setText(currentCube.getNome());
-        tvSize.setText(currentCube.getTamanho());
-        tvType.setText(currentCube.getTipo());
-        tvDificulty.setText(currentCube.getDificuldade());
-        tvPrice.setText(currentCube.getPreco()+ "");
-        imageLoader.displayImage(currentCube.getImagem(), ivCube);
-
+        if (currentPosition < cubeList.size() -1){
+            currentCube = cubeList.get(++currentPosition);
+            tvName.setText(currentCube.getNome());
+            tvSize.setText(currentCube.getTamanho());
+            tvType.setText(currentCube.getTipo());
+            tvDificulty.setText(currentCube.getDificuldade());
+            tvPrice.setText(currentCube.getPreco()+ "");
+            imageLoader.displayImage(currentCube.getImagem(), ivCube);
+        }
         checkIfEnableNext();
         checkIfEnablePrevious();
     }
 
     private void previousCube() {
-        currentCube = cubeList.get(--currentPosition);
-        tvName.setText(currentCube.getNome());
-        tvSize.setText(currentCube.getTamanho());
-        tvType.setText(currentCube.getTipo());
-        tvDificulty.setText(currentCube.getDificuldade());
-        tvPrice.setText(currentCube.getPreco()+ "");
-        imageLoader.displayImage(currentCube.getImagem(), ivCube);
-
+        if (currentPosition > 0){
+            currentCube = cubeList.get(--currentPosition);
+            tvName.setText(currentCube.getNome());
+            tvSize.setText(currentCube.getTamanho());
+            tvType.setText(currentCube.getTipo());
+            tvDificulty.setText(currentCube.getDificuldade());
+            tvPrice.setText(currentCube.getPreco()+ "");
+            imageLoader.displayImage(currentCube.getImagem(), ivCube);
+        }
         checkIfEnableNext();
         checkIfEnablePrevious();
     }
 
     private void checkIfEnablePrevious() {
         if(cubeList != null && currentPosition > 0){
-            btPrevious.setEnabled(true);
+            btPrevious.show();
             return;
         }
-        btPrevious.setEnabled(false);
+        btPrevious.hide();
     }
 
     private void checkIfEnableNext() {
         if(cubeList != null && currentPosition < cubeList.size() - 1){
-            btNext.setEnabled(true);
+            btNext.show();
             return;
         }
-        btNext.setEnabled(false);
+        btNext.hide();
     }
 }

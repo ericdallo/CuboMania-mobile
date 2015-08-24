@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ServiceCubes extends AsyncTask<Void,Void,Void>{
 
-    private final static String CUBO_URL = "http://ec2-52-24-4-97.us-west-2.compute.amazonaws.com:8080/CuboMania//lista.json";
+    private final static String CUBE_URL = "http://ec2-52-24-4-97.us-west-2.compute.amazonaws.com:8080/CuboMania/lista.json";
     private static final String TAG_CUBES = "cubes";
     private JSONArray cubes = null;
 
@@ -35,14 +35,14 @@ public class ServiceCubes extends AsyncTask<Void,Void,Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(mainActivityFragment.getContext(),"Aguarde","Baixando JSON, Por favor aguarde...");
+        progressDialog = ProgressDialog.show(mainActivityFragment.getContext(),"Aguarde","Carregando lista, Por favor aguarde...");
     }
 
     @Override
     protected Void doInBackground(Void... params) {
         ServiceHandler sh = new ServiceHandler();
 
-        String jsonString = sh.makeServiceCall(CUBO_URL,ServiceHandler.GET);
+        String jsonString = sh.makeServiceCall(CUBE_URL,ServiceHandler.GET);
         Log.d("RESPONSE ==> ",jsonString);
 
         if (jsonString != null){
