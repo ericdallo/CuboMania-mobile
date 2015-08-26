@@ -3,6 +3,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="clear_cache">Limpar memoria</string>
+    <string name="no_cubes">Nenhum cubo encontrado</string>
 
     <string-array name="cube_size">
         <item>Selecione um tamanho</item>
