@@ -62,9 +62,9 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         checkIfEnableNext();
         checkIfEnablePrevious();
 
-        btNext.setOnClickListener( (View v) -> nextCube() );
-        btPrevious.setOnClickListener( (View v) -> previousCube() );
-        btSearch.setOnClickListener( (View v) -> serviceCubes.getAll() );
+        btNext.setOnClickListener( v -> nextCube() );
+        btPrevious.setOnClickListener( v -> previousCube() );
+        btSearch.setOnClickListener( v -> serviceCubes.getAll() );
 
         return view;
     }
