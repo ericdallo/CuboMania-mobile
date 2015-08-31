@@ -14,21 +14,23 @@ import android.widget.TextView;
 
 import com.cubomania.Cube.Cube;
 import com.cubomania.Image.ImageLoader;
+import com.cubomania.Interface.AddedToCart;
 import com.cubomania.R;
 import com.cubomania.Service.ServiceCubes;
 
 import java.util.Iterator;
 import java.util.List;
 
-public class MainActivityFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CubesFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    public AddedToCart callback;
     public static final String SELECT_SIZE = "Selecione um tamanho";
     public static final String SELECT_TYPE = "Selecione um tipo";
     private static final String SELECT_DIFICULTY = "Selecione uma dificuldade";
     private ServiceCubes serviceCubes;
     private TextView tvPrice, tvName, tvSize, tvType, tvDificulty;
     private ImageView ivCube;
-    private FloatingActionButton btNext,btPrevious,btSearch;
+    private FloatingActionButton btNext,btPrevious,btSearch,btCart;
     private List<Cube> cubeList;
     private Cube currentCube;
     private int currentPosition = 0;
@@ -36,9 +38,14 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
     private Spinner spinnerSize,spinnerType,spinnerDificulty;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        callback = (AddedToCart) getActivity();
+    }
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.cubes_fragment, container, false);
         serviceCubes = new ServiceCubes(this);
         imageLoader = new ImageLoader(this.getContext());
 
@@ -58,6 +65,8 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         btNext = (FloatingActionButton) view.findViewById(R.id.bt_next);
         btPrevious = (FloatingActionButton) view.findViewById(R.id.bt_previous);
         btSearch = (FloatingActionButton) view.findViewById(R.id.bt_search);
+        btCart = (FloatingActionButton) view.findViewById(R.id.bt_cart);
+        btCart.hide();
 
         checkIfEnableNext();
         checkIfEnablePrevious();
@@ -65,6 +74,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         btNext.setOnClickListener( v -> nextCube() );
         btPrevious.setOnClickListener( v -> previousCube() );
         btSearch.setOnClickListener( v -> serviceCubes.getAll() );
+        btCart.setOnClickListener(v -> addCubeToCart() );
 
         return view;
     }
@@ -102,6 +112,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
             tvDificulty.setText(currentCube.getDificuldade());
             tvPrice.setText(currentCube.getPreco()+ "");
             imageLoader.displayImage(currentCube.getImagem(), ivCube);
+            btCart.show();
         }else{
             currentCube = null;
             tvName.setText(R.string.no_cubes);
@@ -110,6 +121,7 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
             tvDificulty.setText("");
             tvPrice.setText("");
             ivCube.setImageResource(R.drawable.black_cube_init);
+            btCart.hide();
         }
 
         checkIfEnableNext();
@@ -122,8 +134,8 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
         String dificulty = spinnerDificulty.getSelectedItem().toString();
 
         removeFromList(size,cubeList,SELECT_SIZE);
-        removeFromList(type,cubeList,SELECT_TYPE);
-        removeFromList(dificulty,cubeList,SELECT_DIFICULTY);
+        removeFromList(type, cubeList, SELECT_TYPE);
+        removeFromList(dificulty, cubeList, SELECT_DIFICULTY);
     }
 
     private void removeFromList(String filter, List<Cube> listCubes, String select){
@@ -181,5 +193,9 @@ public class MainActivityFragment extends Fragment implements AdapterView.OnItem
             return;
         }
         btNext.hide();
+    }
+
+    private void addCubeToCart() {
+        callback.addToCart(currentCube);
     }
 }

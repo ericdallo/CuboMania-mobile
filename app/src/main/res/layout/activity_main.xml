@@ -6,15 +6,23 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
-        xmlns:android="http://schemas.android.com/apk/res/android" />
-
-
-    <fragment
-        android:layout_below="@+id/toolbar"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
-        android:name="com.cubomania.Fragment.MainActivityFragment" tools:layout="@layout/fragment_main"
-        android:layout_width="match_parent" android:layout_height="match_parent" />
+         />
+    <android.support.v4.view.ViewPager
+        android:layout_below="@+id/toolbar"
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:textColor="@color/ColorPrimary"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp" />
+    </android.support.v4.view.ViewPager>
 </RelativeLayout>
 
 

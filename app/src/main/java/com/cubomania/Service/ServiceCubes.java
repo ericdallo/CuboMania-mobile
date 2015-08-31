@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.cubomania.Cube.Cube;
-import com.cubomania.Fragment.MainActivityFragment;
+import com.cubomania.Fragment.CubesFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,11 +21,11 @@ public class ServiceCubes extends AsyncTask<Void,Void,Void>{
     private JSONArray cubes = null;
 
     private ProgressDialog progressDialog;
-    private MainActivityFragment mainActivityFragment;
+    private CubesFragment cubesFragment;
     private List<Cube> cubesList;
 
-    public ServiceCubes(MainActivityFragment mainActivityFragment) {
-        this.mainActivityFragment = mainActivityFragment;
+    public ServiceCubes(CubesFragment cubesFragment) {
+        this.cubesFragment = cubesFragment;
     }
 
     public void getAll() {
@@ -35,7 +35,7 @@ public class ServiceCubes extends AsyncTask<Void,Void,Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(mainActivityFragment.getContext(),"Aguarde","Carregando lista, Por favor aguarde...");
+        progressDialog = ProgressDialog.show(cubesFragment.getContext(),"Aguarde","Carregando lista, Por favor aguarde...");
     }
 
     @Override
@@ -79,7 +79,7 @@ public class ServiceCubes extends AsyncTask<Void,Void,Void>{
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        mainActivityFragment.updateCubes(cubesList);
+        cubesFragment.updateCubes(cubesList);
         progressDialog.dismiss();
     }
 }

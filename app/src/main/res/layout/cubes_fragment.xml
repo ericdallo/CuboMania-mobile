@@ -40,31 +40,53 @@
             android:textStyle="bold"
             android:layout_below="@+id/cube_dificulty"
             />
+    <LinearLayout
+        android:id="@+id/layout_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/cube_title">
         <ImageView
-            android:layout_marginTop="15dp"
             android:id="@+id/cube_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cube_title"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
             android:src="@drawable/black_cube_init"
             android:contentDescription="cube_image" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/bt_cart"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_ic_cart"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+            android:layout_marginRight="@dimen/fab_button_margin_right"
+            android:layout_marginEnd="@dimen/fab_button_margin_right"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:borderWidth="0dp"/>
+    </LinearLayout>
         <LinearLayout
             android:id="@+id/linear_price"
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/cube_image"
+            android:layout_below="@+id/layout_image"
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="180dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Preço:"
                 />
             <TextView
                 android:id="@+id/res_price"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -78,13 +100,15 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="180dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Tamanho:" />
             <TextView
                 android:id="@+id/res_size"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -98,14 +122,16 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="180dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Tipo:"
                 />
             <TextView
                 android:id="@+id/res_type"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -119,14 +145,16 @@
             android:orientation="horizontal"
             >
             <TextView
-                android:layout_width="180dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Dificuldade:"
                 />
             <TextView
                 android:id="@+id/res_dificulty"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
@@ -179,4 +207,5 @@
                 app:pressedTranslationZ="12dp"
                 app:borderWidth="0dp"/>
         </RelativeLayout>
+
     </RelativeLayout>

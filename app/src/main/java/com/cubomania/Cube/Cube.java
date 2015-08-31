@@ -9,6 +9,11 @@ public class Cube {
     private String dificuldade;
     private String imagem;
     private double preco;
+    private int quantidade;
+
+    public Cube(){
+        setQuantidade(1);
+    }
 
     public int getId() {
         return id;
@@ -66,4 +71,16 @@ public class Cube {
         this.preco = preco;
     }
 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 }

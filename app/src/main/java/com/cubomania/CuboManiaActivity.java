@@ -1,15 +1,23 @@
 package com.cubomania;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cubomania.Cube.Cube;
+import com.cubomania.Fragment.CartFragment;
 import com.cubomania.Image.FileCache;
 import com.cubomania.Image.MemoryCache;
+import com.cubomania.Interface.AddedToCart;
 
-public class MainActivity extends AppCompatActivity {
+public class CuboManiaActivity extends AppCompatActivity implements AddedToCart{
+
+    private CartFragment cartFragment;
+    private CustomViewPagerAdapter customViewPagerAcapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setPageTransformer(false, (page, position) -> {
+            //page.setRotation(position * -30);
+            final float normalizedPostion = Math.abs(Math.abs(position) - 1);
+            page.setScaleX(normalizedPostion / 2 + 0.5f);
+            page.setScaleY(normalizedPostion / 2 + 0.5f);
+            page.setAlpha(normalizedPostion);
+        });
+
+        customViewPagerAcapter = new CustomViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(customViewPagerAcapter);
+
     }
 
     @Override
@@ -45,5 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void addToCart(Cube currentCube) {
+        cartFragment = customViewPagerAcapter.getCartFrag();
+        cartFragment.addCube(currentCube);
     }
 }

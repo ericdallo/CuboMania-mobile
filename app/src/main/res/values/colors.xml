@@ -2,6 +2,8 @@
 <resources>
     <color name="ColorPrimary">#0082d3</color>
     <color name="ColorPrimaryDark">#0078b9</color>
-    <color name="light_purple">#00bfff</color>
+    <color name="light_blue">#00afff</color>
+    <color name="green">#00b526</color>
+    <color name="red">#b51100</color>
 
 </resources>
