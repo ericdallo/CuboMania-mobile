@@ -2,6 +2,7 @@ package com.cubomania.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cubomania.Activity.CartFinished;
-import com.cubomania.Activity.CuboManiaActivity;
 import com.cubomania.Adapter.CubesAdapter;
 import com.cubomania.Cube.Cube;
 import com.cubomania.R;
@@ -90,7 +90,8 @@ public class CartFragment extends Fragment {
 
     private void checkCart() {
         Intent intent = new Intent(getContext(),CartFinished.class);
-        intent.putExtra("totalPrice",String.valueOf(totalPrice));
+        intent.putExtra("totalPrice", String.valueOf(totalPrice));
+        intent.putParcelableArrayListExtra("cubeList", (ArrayList<Cube>) cubesList);
         startActivity(intent);
         clearCart();
     }

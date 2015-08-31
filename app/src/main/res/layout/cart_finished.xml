@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/tv_title_finished"
@@ -19,4 +21,51 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title_finished"
         android:textSize="24sp"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/layout_tabela_finished"
+        android:layout_below="@+id/tv_total_finished"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:text="Nome"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Quantidade"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_below="@+id/layout_tabela_finished"
+        android:id="@+id/list_checked_cubes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="80dp">
+
+    </ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/bt_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:src="@drawable/fab_ic_download2"
+        android:layout_centerHorizontal="true"
+        app:layout_anchorGravity="bottom|center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/fab_button_margin_bottom"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp"
+
+        app:borderWidth="0dp"/>
+
 </RelativeLayout>

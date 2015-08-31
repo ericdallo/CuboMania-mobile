@@ -1,6 +1,9 @@
 package com.cubomania.Cube;
 
-public class Cube {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Cube implements Parcelable{
 
     private int id;
     private String nome;
@@ -11,8 +14,19 @@ public class Cube {
     private double preco;
     private int quantidade;
 
-    public Cube(){
+    public Cube() {
         setQuantidade(1);
+    }
+
+    public Cube(Parcel source) {
+        id = source.readInt();
+        nome = source.readString();
+        tamanho = source.readString();
+        tipo = source.readString();
+        dificuldade = source.readString();
+        imagem = source.readString();
+        preco = source.readDouble();
+        quantidade = source.readInt();
     }
 
     public int getId() {
@@ -83,4 +97,34 @@ public class Cube {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
+
+    @Override
+    public int describeContents() {
+        return this.hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nome);
+        dest.writeString(tamanho);
+        dest.writeString(tipo);
+        dest.writeString(dificuldade);
+        dest.writeString(imagem);
+        dest.writeDouble(preco);
+        dest.writeInt(quantidade);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator(){
+
+        @Override
+        public Object createFromParcel(Parcel source) {
+            return new Cube(source);
+        }
+
+        @Override
+        public Cube[] newArray(int size) {
+            return new Cube[size];
+        }
+    };
 }
