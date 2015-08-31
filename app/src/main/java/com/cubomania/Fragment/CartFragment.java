@@ -1,5 +1,6 @@
 package com.cubomania.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cubomania.Activity.CartFinished;
+import com.cubomania.Activity.CuboManiaActivity;
 import com.cubomania.Adapter.CubesAdapter;
 import com.cubomania.Cube.Cube;
 import com.cubomania.R;
@@ -49,6 +52,7 @@ public class CartFragment extends Fragment {
         btCheck = (FloatingActionButton) view.findViewById(R.id.bt_check);
 
         btRemoveAll.setOnClickListener(v -> clearCart());
+        btCheck.setOnClickListener(v -> checkCart() );
 
         cubesList = new ArrayList<>();
         cubesAdapter = new CubesAdapter(getActivity(),cubesList);
@@ -82,6 +86,13 @@ public class CartFragment extends Fragment {
 
         cubesAdapter.notifyDataSetChanged();
         showAll();
+    }
+
+    private void checkCart() {
+        Intent intent = new Intent(getContext(),CartFinished.class);
+        intent.putExtra("totalPrice",String.valueOf(totalPrice));
+        startActivity(intent);
+        clearCart();
     }
 
     private void clearCart() {

@@ -1,4 +1,4 @@
-package com.cubomania;
+package com.cubomania.Activity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -8,10 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cubomania.Cube.Cube;
+import com.cubomania.CustomViewPagerAdapter;
 import com.cubomania.Fragment.CartFragment;
 import com.cubomania.Image.FileCache;
 import com.cubomania.Image.MemoryCache;
 import com.cubomania.Interface.AddedToCart;
+import com.cubomania.R;
 
 public class CuboManiaActivity extends AppCompatActivity implements AddedToCart{
 
