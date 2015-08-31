@@ -29,7 +29,9 @@ public class CartFragment extends Fragment {
     private ListView listView;
     private CubesAdapter cubesAdapter;
     private FloatingActionButton btRemoveAll,btCheck;
-    private LinearLayout layoutTable;
+    private LinearLayout layoutTable,layoutTotal;
+    private TextView tvTotal;
+    private double totalPrice = 0.0;
 
     @Nullable
     @Override
@@ -37,21 +39,22 @@ public class CartFragment extends Fragment {
         View view = inflater.inflate(R.layout.cart_fragment,container,false);
 
         layoutTable = (LinearLayout) view.findViewById(R.id.layout_tabela);
-        layoutTable.setVisibility(View.GONE);
+        layoutTotal = (LinearLayout) view.findViewById(R.id.layout_total);
 
         tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        tvTotal = (TextView) view.findViewById(R.id.tv_total);
         ivEmptyCart = (ImageView) view.findViewById(R.id.iv_empty_cart);
+
+        btRemoveAll = (FloatingActionButton) view.findViewById(R.id.bt_clear_cart);
+        btCheck = (FloatingActionButton) view.findViewById(R.id.bt_check);
+
+        btRemoveAll.setOnClickListener(v -> clearCart());
 
         cubesList = new ArrayList<>();
         cubesAdapter = new CubesAdapter(getActivity(),cubesList);
 
         listView = (ListView) view.findViewById(R.id.list_cart);
         listView.setAdapter(cubesAdapter);
-
-        btRemoveAll = (FloatingActionButton) view.findViewById(R.id.bt_clear_cart);
-        btCheck = (FloatingActionButton) view.findViewById(R.id.bt_check);
-
-        btRemoveAll.setOnClickListener(v -> clearCart());
 
         hideAll();
 
@@ -74,6 +77,8 @@ public class CartFragment extends Fragment {
         if(!hasCube){
             cubesList.add(cubeToAdd);
         }
+        totalPrice += cubeToAdd.getPreco();
+        tvTotal.setText(String.valueOf(totalPrice));
 
         cubesAdapter.notifyDataSetChanged();
         showAll();
@@ -87,6 +92,7 @@ public class CartFragment extends Fragment {
         tvTitle.setLayoutParams(llp);
         tvTitle.setText("Carrinho vazio");
         tvTitle.setGravity(Gravity.CENTER);
+        totalPrice = 0.0;
 
         hideAll();
     }
@@ -96,12 +102,14 @@ public class CartFragment extends Fragment {
         btRemoveAll.show();
         ivEmptyCart.setVisibility(View.GONE);
         layoutTable.setVisibility(View.VISIBLE);
+        layoutTotal.setVisibility(View.VISIBLE);
     }
 
     private void hideAll() {
         btCheck.hide();
         btRemoveAll.hide();
         layoutTable.setVisibility(View.GONE);
+        layoutTotal.setVisibility(View.GONE);
         ivEmptyCart.setVisibility(View.VISIBLE);
     }
 }
