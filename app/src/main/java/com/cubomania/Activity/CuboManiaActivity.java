@@ -73,6 +73,7 @@ public class CuboManiaActivity extends AppCompatActivity implements AddedToCart{
     @Override
     public void addToCart(Cube currentCube) {
         cartFragment = customViewPagerAcapter.getCartFrag();
-        cartFragment.addCube(currentCube);
+        cartFragment.addCube(currentCube,viewPager);
+
     }
 }

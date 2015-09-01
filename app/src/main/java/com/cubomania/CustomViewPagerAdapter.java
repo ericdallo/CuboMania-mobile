@@ -4,17 +4,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.cubomania.Fragment.CartFragment;
 import com.cubomania.Fragment.CubesFragment;
-import com.cubomania.Fragment.EmptyCartFragment;
 
-public class CustomViewPagerAdapter extends FragmentStatePagerAdapter {
+public class CustomViewPagerAdapter extends FragmentPagerAdapter {
 
     private final static int NUM_ITEMS = 2;
     private CubesFragment cubesFragment;
     private CartFragment cartFragment;
-    private EmptyCartFragment emptyCartFragment;
 
     public CustomViewPagerAdapter(FragmentManager supportFragmentManager) {
         super(supportFragmentManager);
@@ -33,6 +32,8 @@ public class CustomViewPagerAdapter extends FragmentStatePagerAdapter {
                 return null;
         }
     }
+
+
 
     @Override
     public int getCount() {
